@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
+#    Updated: 2022/01/31 17:26:05 by seyun            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 # =============================================================================
 # Color Variables
@@ -18,39 +29,61 @@ LINE_CLEAR	=	"\x1b[1A\x1b[M"
 # Command Variables
 # =============================================================================
 
-NAME = minishell
+NAME		=	minishell
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC			=	gcc
+CFLAGS		=	-Wall -Werror -Wextra
+RM			=	rm -f
 
-INCS = -I./srcs -I./libft 
-INCLIB = -Llibft -lft
+HEADER		=	./includes/
+LIBFT_A		= 	./Libft/libft.a
+LIBFT_D		=	./Libft/
+OPTION		=   -lreadline -L/Users/seyun/homebrew/opt/readline/lib -I/Users/seyun/homebrew/opt/readline/include
 
-LIBFT_D = ./libft
-LIBFT_A = ./libft/libft.a
+# =============================================================================
+# File Variables
+# =============================================================================
 
-RL = readline
-RLL = User/seyun/homebrew/opt/readline/lib
-RLI = User/seyun/homebrew/opt/readline/include
+FILES 	=	main.c
+SRC		=   $(addprefix srcs/, $(FILES))
+OBJ		=	$(SRC:.c=.o)
+INCLIB	=	-Llibft -lft
 
-FILES = main.c \
+# =============================================================================
+# Target Generating
+# =============================================================================
 
-SRCS = $(addprefix srcs/, $(FILES))
-OBJS = $(SRCS:.c=.o)
+all			:	$(NAME)
 
-all : $(NAME)
+%.o			:	%.c
+				@make -C $(LIBFT_D)
+				@echo $(YELLOW) "Compiling...\t" $< $(EOC) $(LINE_CLEAR)
+				@$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
 
-$(NAME): $(OBJS)
-	make -C $(LIBFT_D)
-	$(CC) $(CFLAGS) $(INCS) -o $(NAME) $(OBJS) $(INCLIB) -l$(RL) -I $(RLL) -L $(RLI)
-	
-clean:
-	make -C $(LIBFT_D) clean
-	rm -f $(OBJS)
+$(NAME)		:	$(OBJ)
+				@echo $(GREEN) "Source files are compiled!\n" $(EOC)
+				@echo $(WHITE) "Building $(NAME) for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
+				@$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBFT_D) -o $(NAME) $(OBJ) $(INCLIB) $(OPTION)
+				@echo $(GREEN) "$(NAME) is created!\n" $(EOC)
 
-fclean: clean
-	rm -f $(NAME) $(LIBFT_A)
+# =============================================================================
+# Rules
+# =============================================================================
 
-re: fclean all
+clean		:
+				@echo $(YELLOW) "Cleaning object files..." $(EOC)
+				@$(RM) $(OBJ)
+				@make -C $(LIBFT_D) clean
+				@echo $(RED) "Object files are cleaned!\n" $(EOC)
 
-.PHONY: all clean fclean re
+fclean		:	clean
+				@echo $(YELLOW) "Removing $(NAME)..." $(EOC)
+				@$(RM) $(NAME)
+				@rm -f $(NAME) $(LIBFT_A)
+				@echo $(RED) "$(NAME) is removed!\n" $(EOC)
+
+re			:	fclean all
+
+.PHONY		:	norm
+norm		:
+				@norminette
