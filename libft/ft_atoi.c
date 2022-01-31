@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 23:10:44 by seyun             #+#    #+#             */
-/*   Updated: 2021/06/25 15:46:38 by seyun            ###   ########.fr       */
+/*   Updated: 2021/12/22 16:04:22 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_atoi(const char *str)
 {
-	int	res;
+	long long res;
 	int	sign;
 
 	res = 0;
@@ -29,5 +29,7 @@ int	ft_atoi(const char *str)
 		res *= 10;
 		res += (sign * (*(str++) - '0'));
 	}
-	return (res);
+	if (res > 2147483647 || res < -2147483648)
+		return (-1);
+	return ((int)res);
 }
