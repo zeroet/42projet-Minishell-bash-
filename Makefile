@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/01/31 17:26:05 by seyun            ###   ########.fr        #
+#    Updated: 2022/01/31 17:43:16 by seyun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ RM			=	rm -f
 HEADER		=	./includes/
 LIBFT_A		= 	./Libft/libft.a
 LIBFT_D		=	./Libft/
-OPTION		=   -lreadline -L/Users/seyun/homebrew/opt/readline/lib -I/Users/seyun/homebrew/opt/readline/include
+RL			=   readline 
+RLL			=	/Users/$(USER)/homebrew/opt/readline/lib 
+RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
 
 # =============================================================================
 # File Variables
@@ -63,7 +65,7 @@ all			:	$(NAME)
 $(NAME)		:	$(OBJ)
 				@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 				@echo $(WHITE) "Building $(NAME) for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
-				@$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBFT_D) -o $(NAME) $(OBJ) $(INCLIB) $(OPTION)
+				@$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBFT_D) -o $(NAME) $(OBJ) $(INCLIB) -l$(RL) -L$(RLL)
 				@echo $(GREEN) "$(NAME) is created!\n" $(EOC)
 
 # =============================================================================

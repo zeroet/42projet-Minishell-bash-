@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:58:28 by seyun             #+#    #+#             */
-/*   Updated: 2022/01/31 17:23:53 by seyun            ###   ########.fr       */
+/*   Updated: 2022/01/31 17:44:36 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void handler(int signum)
 	if (signum != SIGINT)
 		return ;
 	rl_on_new_line();
-	//rl_replace_line("", 1); readline path 문제 때문에 makefile 수정이 필요해서 주석처리
+	//rl_replace_line("", 1); // 컴파일 에러 때문에 주석처
 	rl_redisplay();
 }
 
