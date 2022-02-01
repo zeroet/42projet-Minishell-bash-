@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:58:28 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/01 01:45:59 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/01 13:26:07 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	parse(char *line)
 void handler(int signum)
 {
 	if (signum == SIGINT)
-		printf("minishell > \n");
+		printf("minishell > \n");//CTRL+C 새로운 프롬프터 생성 
 	if (rl_on_new_line() == -1)
 		exit (1);
 	rl_replace_line("", 1);
@@ -33,14 +33,20 @@ void handler(int signum)
 int main(void)
 {
 	char *line;
+	struct termios term;//터미널을 제어할수 있는 구조체 
 
-	signal(SIGINT, handler);// CTRL + C 새로운 프롬프터 생성 ^C출력문제는 해결해야함....
+    tcgetattr(STDIN_FILENO, &term);
+    term.c_lflag &= ~(ECHOCTL); //^c출력문제 해결
+    tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	signal(SIGINT, handler);// CTRL + C 새로운 프롬프터 생성
 	signal(SIGQUIT, SIG_IGN);//CTRL + \ 아무일없다
 	while (1)
 	{
 		line = readline("minishell > ");
-		if (!line)
+		if (!line) //바쉬와 동일하게 출력. 개행방지
 		{	
+			printf("\033[1A");//ANSI control sequences 커서한칸위로
+            printf("\033[12C");//커서 12칸 앞으로   
 			printf("exit\n");
 			exit(-1);
 		}

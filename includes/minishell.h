@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/01 01:02:13 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/01 09:23:04 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 #include <stdlib.h>
 #include <signal.h>
 #include "../libft/libft.h"
+#include <termios.h>
 
 #endif
