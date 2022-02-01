@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/01 09:23:04 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/01 23:10:27 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,36 @@
 #include <signal.h>
 #include "../libft/libft.h"
 #include <termios.h>
+
+# define T_NULL 0
+# define T_WORD 1
+# define T_PIPE 2
+# define T_REDIRECT 3
+# define T_DOUBLE_QUOTES 4
+# define T_SINGLE_QUOTES 5
+
+typedef struct s_token
+{
+	int token;
+	char *str;
+}		t_token;
+
+typedef struct s_env
+{
+	char *origin_env;
+	char *name;
+	char *value;
+}		t_env;
+
+/********** env_create **********/
+void	get_env(char **envp, t_list **env);
+
+/********** parse **********/
+
+void	parse(t_list *env, char *line);
+
+/********** signal **********/
+
+void	set_signal(void);	
 
 #endif

@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/02/01 01:05:05 by eyoo             ###   ########.fr        #
+#    Updated: 2022/02/01 23:07:43 by seyun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,10 @@ RLI			= 	/Users/$(USER)/.brew/opt/readline/include
 # File Variables
 # =============================================================================
 
-FILES 	=	main.c
+FILES 	=	main.c \
+			env_create.c \
+			parse.c \
+			signal.c
 SRC		=   $(addprefix srcs/, $(FILES))
 OBJ		=	$(SRC:.c=.o)
 INCLIB	=	-Llibft -lft
