@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:58:28 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/01 00:03:53 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/01 01:45:59 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	parse(char *line)
 
 void handler(int signum)
 {
-	if (signum != SIGINT)
-		return ;
-	rl_on_new_line();
-	rl_replace_line("", 1); // 컴파일 에러 때문에 주석처
+	if (signum == SIGINT)
+		printf("minishell > \n");
+	if (rl_on_new_line() == -1)
+		exit (1);
+	rl_replace_line("", 1);
 	rl_redisplay();
 }
 
@@ -33,13 +34,16 @@ int main(void)
 {
 	char *line;
 
-	signal(SIGINT, handler);
+	signal(SIGINT, handler);// CTRL + C 새로운 프롬프터 생성 ^C출력문제는 해결해야함....
+	signal(SIGQUIT, SIG_IGN);//CTRL + \ 아무일없다
 	while (1)
 	{
 		line = readline("minishell > ");
-		
-		if (ft_strcmp(line, "exit") == 0)
-			exit(1);
+		if (!line)
+		{	
+			printf("exit\n");
+			exit(-1);
+		}
 		else if (line)
 			parse(line);
 		add_history(line);
