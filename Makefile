@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/01/31 17:43:16 by seyun            ###   ########.fr        #
+#    Updated: 2022/02/01 01:05:05 by eyoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ HEADER		=	./includes/
 LIBFT_A		= 	./Libft/libft.a
 LIBFT_D		=	./Libft/
 RL			=   readline 
-RLL			=	/Users/$(USER)/homebrew/opt/readline/lib 
-RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
+RLL			=	/Users/$(USER)/.brew/opt/readline/lib 
+RLI			= 	/Users/$(USER)/.brew/opt/readline/include
 
 # =============================================================================
 # File Variables
@@ -60,12 +60,12 @@ all			:	$(NAME)
 %.o			:	%.c
 				@make -C $(LIBFT_D)
 				@echo $(YELLOW) "Compiling...\t" $< $(EOC) $(LINE_CLEAR)
-				@$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
+				@$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBFT_D) -I $(RLI) -o $@ -c $<
 
 $(NAME)		:	$(OBJ)
 				@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 				@echo $(WHITE) "Building $(NAME) for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
-				@$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBFT_D) -o $(NAME) $(OBJ) $(INCLIB) -l$(RL) -L$(RLL)
+				@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(INCLIB) -l$(RL) -L $(RLL)
 				@echo $(GREEN) "$(NAME) is created!\n" $(EOC)
 
 # =============================================================================
