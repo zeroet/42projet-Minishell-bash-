@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:11:32 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/01 23:16:38 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/02 09:22:33 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	set_name_value(t_env *new)
 	int i;
 
 	i = 0;
-	i = find(new->origin_env, '=');
+	i = find(new->origin, '=');
 	if (i == 0)
 		ft_strexit("ERROR: PATH start '='\n");
-	new->name = ft_substr(new->origin_env, 0, i);
-	new->value = ft_substr(new->origin_env, i+1, ft_strlen(new->origin_env) - i);
+	new->name = ft_substr(new->origin, 0, i);
+	new->value = ft_substr(new->origin, i+1, ft_strlen(new->origin) - i);
 	if (!new->name || !new->value)
 		ft_strexit("ERROR: Evnp (new->name/new->value)\n");
 }
@@ -47,11 +47,14 @@ t_env	*new_env(void)
 	new = (t_env *)malloc(sizeof(t_env));
 	if (new == NULL)
 		return (NULL);
-	new->origin_env = NULL;
+	new->origin = NULL;
 	new->name = NULL;
 	new->value = NULL;
 	return (new);
 }
+
+// t_list *env 연결리스트안에 struct new 환경변수 이름/PATH를 받기위한 함수
+// tmp 리스트 임시보관 후 ret로 env 에 전달
 
 void	get_env(char **envp, t_list **env)
 {
@@ -63,16 +66,14 @@ void	get_env(char **envp, t_list **env)
 	i = 0;
 	tmp = NULL;
 	ret = tmp;
-	while (envp[i] != NULL)
+	while (envp[i] != '\0')
 	{	
 		new = new_env();
-		new->origin_env = ft_strdup(envp[i]);
+		new->origin = ft_strdup(envp[i]);
+		tmp = ft_lstnew(new);
 		set_name_value(new);
-		if (tmp->next == NULL)
-			tmp = ft_lstnew(new);
-		else
-			ft_lstadd_back(&tmp, new);
+		ft_lstadd_back(&ret, tmp);
 		i++;
 	}
-	*env = ret;
+	*(env) = ret;
 }

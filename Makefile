@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/02/01 23:07:43 by seyun            ###   ########.fr        #
+#    Updated: 2022/02/02 09:19:55 by seyun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,15 +32,16 @@ LINE_CLEAR	=	"\x1b[1A\x1b[M"
 NAME		=	minishell
 
 CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	-Wall -Werror -Wextra -g3 -fsanitize=address
 RM			=	rm -f
 
 HEADER		=	./includes/
 LIBFT_A		= 	./Libft/libft.a
 LIBFT_D		=	./Libft/
 RL			=   readline 
-RLL			=	/Users/$(USER)/.brew/opt/readline/lib 
-RLI			= 	/Users/$(USER)/.brew/opt/readline/include
+RLL			=	/Users/$(USER)/homebrew/opt/readline/lib 
+RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
+
 
 # =============================================================================
 # File Variables
