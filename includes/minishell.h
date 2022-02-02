@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/01 23:10:27 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/02 09:25:47 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_token
 
 typedef struct s_env
 {
-	char *origin_env;
+	char *origin;
 	char *name;
 	char *value;
 }		t_env;
