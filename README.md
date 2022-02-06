@@ -11,8 +11,3 @@
 (seyun)
 
 1. t_list *env  lstadd_back 수정완료
-
-#### 06/02
-
-1. (ing)line 을 space 단위로 나눠서 token의 개수를 확인 (quote인 경우 "/' 가 닫혀있는지 확인)
-2. (예정)token을 각각의 type으로 정의 | 파이프 > < >> << 리다이렉션 cmd 로 분류 
