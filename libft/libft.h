@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 21:43:23 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/02 18:10:23 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/06 18:04:30 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int			ft_only_digit(char *str);
 char		*ft_strndup(char *s1, size_t size);
 char		*ft_strcpy(char *dst, char *src, size_t n);
-int		ft_isspace(char *str);
+int			ft_isspace(char c);
 
 #endif

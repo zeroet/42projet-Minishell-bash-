@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/02 09:25:47 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/06 18:02:42 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ typedef struct s_token
 	int token;
 	char *str;
 }		t_token;
+
+typedef struct s_token_info
+{
+	int count;
+	t_token *token;
+}	t_token_info;
 
 typedef struct s_env
 {
