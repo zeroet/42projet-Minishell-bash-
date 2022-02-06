@@ -11,4 +11,3 @@
 (seyun)
 
 1. t_list *env  lstadd_back 수정완료
-2. parser - lexical analyser - single double quote control (ing...)
