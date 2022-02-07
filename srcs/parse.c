@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/06 19:08:37 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/07 18:08:19 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int		check_end_quote(char *line, int i)
 		while (line[i] != '\0')
 		{
 			i++;
-			if (line[i] == '\"')
+			if (line[i] == '\\' && line[i + 1] == '\"')
+				i++;
+			else if (line[i] == '\"')
 				return (i);
 		}
 	}
@@ -28,96 +30,90 @@ int		check_end_quote(char *line, int i)
 		while (line[i] != '\0')
 		{
 			i++;
-			if (line[i] == '\'')
+			if (line[i] == '\\' && line[i + 1] == '\'')
+				i++;
+			else if (line[i] == '\'')
 				return (i);
 		}
 	}
 	return (-1);
 }
 
-int		counting_token(char *line)
+void	counting_while(char *line, int *i, int *count)
+{
+	if (ft_isspace(line[*i]))
+		(*i)++;
+	else if(line[*i] == '\'' || line[*i] == '\"')
+	{
+		*i = check_end_quote(line, *i);
+		if (*i != -1)
+		{
+			(*i)++;
+			(*count)++;
+		}
+	}
+	else
+	{
+		while (!ft_isspace(line[*i]) && line[*i] != '\0')
+		{
+			if (line[*i] == '\'' || line[*i] == '\"')
+				break ;
+			(*i)++;
+		}
+		(*count)++;
+	}
+}
+
+// fn value 에 token type 값 넣어야함  " ' type 의 경우 4 or 5
+int		counting_token(char *line, t_token)
 {
 	int i;
 	int count;
-	int quote_end;
 
 	i = 0;
-	quote_end = 0;
 	count = 0;
 	while (line[i] != '\0')
 	{	
-		printf("%c\n", line[i]);
-		if (ft_isspace(line[i]))
-			i++;
-		else if (line[i] == '\'' || line[i] == '\"')
-		{	
-			quote_end = check_end_quote(line, i);
-			if (quote_end == -1)
-				return (-1);
-			else
-				i = quote_end;
-			i++;
-			count++;
-			printf("%d ------count inside \n", count);
-		}
-		else
-		{
-			while (!ft_isspace(line[i]) && line[i] != '\0')
-			{
-				if (line[i] == '\'' || line[i] == '\"')
-					break ;
-				printf("%c ----- inside while\n", line[i]);
-				i++;
-			}
-			count++;
-			printf("%d -----count inside\n", count);
-		}
+		counting_while(line, &i, &count);
+		if (i == -1)  // " or ' 가 닫히지 않았을 경우 -1 
+			return (-1);
 	}
 	return (count);
 }
 
 int		tokenizer(char *line, t_token_info *token_info)
 {
-	int count;
-
-	count = 0;
 	if (*line == '\0')
 		return (-1);
-	count = counting_token(line);
-	if (count == -1)
-	{	
-		printf("----end quote error\n");
+	token_info->count = counting_token(line);
+	if (token_info->count == -1)
 		return (-1);
-	}
-	//token_info->token = (t_token *)malloc(sizeof(t_token) * count);
-	//if (token_info->token == NULL)
-//		return (-1);
-	token_info = NULL;
-	printf("%d --- token count \n", count);
-	return (count);
+	token_info->token = (t_token *)malloc(sizeof(t_token) * token_info->count);
+	if (token_info->token == NULL)
+		return (-1);
+	return (token_info->count);
 }
 
 int		lexical_analyser(t_list *env, char *line, t_token_info *token_info)
 {
 	int count;
 
+	count = 0;
 	count = tokenizer(line, token_info);
-	printf("%d --- end count \n", count);
 	if (count == -1)
 		return (-1);
 	env = NULL;
-	return (0);
+	return (count);
 }
 
 // 낱말 분석 - 'space'단위로 split  단 " ' $ < > << | 만날때 예외처리
 
 void	parse(t_list *env, char *line)
 {
-	t_token_info *token_info;
-	int count;
-	t_env *env_list;
-	
-	token_info = NULL;
+	t_token_info tokens;
+	t_env		*env_list;
+	int			count;
+
 	count = 0;
 	while (env)
 	{
@@ -125,8 +121,10 @@ void	parse(t_list *env, char *line)
 		printf("%s\n", env_list->origin);
 		env = env->next;
 	}
-	count = lexical_analyser(env, line, token_info);
+	count = lexical_analyser(env, line, &tokens);
 	if (count == -1)
 		printf("*************count -1***************\n");	
+	else
+		printf("************token %d ***************\n", count);
 	return ;
 }
