@@ -6,11 +6,13 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/07 18:39:22 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/07 21:21:29 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 
 int		check_end_quote(char *line, int i)
 {
@@ -88,9 +90,10 @@ int		tokenizer(char *line, t_token_info *token_info)
 	token_info->count = counting_token(line);
 	if (token_info->count == -1)
 		return (-1);
-	token_info->token = (t_token *)malloc(sizeof(t_token) * token_info->count);
+	token_info->tokens = (t_token *)malloc(sizeof(t_token) * token_info->count + 1);
 	if (token_info->token == NULL)
 		return (-1);
+	token_info->tokens = split_line(line, token_info->count, token_info->tokens);
 	return (token_info->count);
 }
 
