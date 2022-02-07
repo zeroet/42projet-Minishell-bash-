@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/07 18:08:19 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/07 18:39:22 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	counting_while(char *line, int *i, int *count)
 }
 
 // fn value 에 token type 값 넣어야함  " ' type 의 경우 4 or 5
-int		counting_token(char *line, t_token)
+int		counting_token(char *line)
 {
 	int i;
 	int count;

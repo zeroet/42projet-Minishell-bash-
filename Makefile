@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/02/02 09:19:55 by seyun            ###   ########.fr        #
+#    Updated: 2022/02/07 18:33:40 by seyun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ LIBFT_D		=	./Libft/
 RL			=   readline 
 RLL			=	/Users/$(USER)/homebrew/opt/readline/lib 
 RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
-
 
 # =============================================================================
 # File Variables
