@@ -22,3 +22,8 @@ x   - 예정
 1. (ok)token split(space 단위로)  "/'일경우 "/'로 닫혀있는지 확인후 닫혀있지 않다면 -1 count 반환.
 2. (?)" " // ' ' 안에 space 처리 (?????)
 3. (x)나누어진 토큰 개수만큼 malloc후 token tpye  |  // >> << > < // cmd 로 나누어 정렬시키기.
+
+#### 07/02
+
+1. (ing)split_line 시작
+2. $PATH // $? etc 적용안되는거 확인.
