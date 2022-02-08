@@ -6,37 +6,62 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/07 21:21:29 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/08 22:26:34 by seyun            ###   ########.fr       */
 /*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
-int		check_end_quote(char *line, int i)
+int		double_quote(char *line, int i)
 {
-	if (line[i] == '\"')
+	while (line[i] != '\0')
 	{
-		while (line[i] != '\0')
-		{
+		i++;
+		if (line[i] == '\\' && line [i + 1] == '\"')
 			i++;
-			if (line[i] == '\\' && line[i + 1] == '\"')
-				i++;
-			else if (line[i] == '\"')
-				return (i);
+		else if (line[i] == '\"')
+		{
+			return (i);
 		}
 	}
-	else if (line[i] == '\'')
+	return (-1);
+}
+
+int		single_quote(char *line, int i)
+{
+	while (line[i] != '\0')
 	{
-		while (line[i] != '\0')
-		{
+		i++;
+		if (line[i] == '\\' && line[i + 1] == '\'')
 			i++;
-			if (line[i] == '\\' && line[i + 1] == '\'')
-				i++;
-			else if (line[i] == '\'')
-				return (i);
+		else if (line[i] == '\'')
+		{	
+			return (i);
 		}
+	}
+	return (-1);
+}
+
+int		check_end_quote(char *line, int i, t_token *token)
+{
+	if (line[i] == '\"')
+	{	
+		i = double_quote(line, i);
+		if (i == -1)
+			return (-1);
+		if (token != NULL)
+			token->type = T_DOUBLE_QUOTES;
+		return (i);
+	}
+	else if (line[i] == '\'')
+	{	
+		i = single_quote(line, i);
+		if (i == -1)
+			return (-1);
+		if (token != NULL)
+			token->type = T_SINGLE_QUOTES;
+		return (i);
 	}
 	return (-1);
 }
@@ -47,7 +72,7 @@ void	counting_while(char *line, int *i, int *count)
 		(*i)++;
 	else if(line[*i] == '\'' || line[*i] == '\"')
 	{
-		*i = check_end_quote(line, *i);
+		*i = check_end_quote(line, *i, NULL);
 		if (*i != -1)
 		{
 			(*i)++;
@@ -90,10 +115,12 @@ int		tokenizer(char *line, t_token_info *token_info)
 	token_info->count = counting_token(line);
 	if (token_info->count == -1)
 		return (-1);
-	token_info->tokens = (t_token *)malloc(sizeof(t_token) * token_info->count + 1);
-	if (token_info->token == NULL)
+	token_info->tokens = (t_token *)malloc(sizeof(t_token) * (token_info->count + 1));
+	if (token_info->tokens == NULL)
 		return (-1);
-	token_info->tokens = split_line(line, token_info->count, token_info->tokens);
+	token_info->tokens = split_token(line, token_info->count, token_info->tokens);
+	for(int i =0; i < token_info->count; i++)
+		printf("%d ---token type || %s ---token str\n", token_info->tokens[i].type, token_info->tokens[i].str);
 	return (token_info->count);
 }
 
