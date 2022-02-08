@@ -27,3 +27,7 @@ x   - 예정
 
 1. (ing)split_line 시작
 2. $PATH // $? etc 적용안되는거 확인.
+
+$$$$ 08/02 
+
+1. split_line 복붙 :/ 
