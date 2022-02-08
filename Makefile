@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/02/02 09:19:55 by seyun            ###   ########.fr        #
+#    Updated: 2022/02/08 21:09:19 by seyun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ RL			=   readline
 RLL			=	/Users/$(USER)/homebrew/opt/readline/lib 
 RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
 
-
 # =============================================================================
 # File Variables
 # =============================================================================
@@ -50,7 +49,9 @@ RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
 FILES 	=	main.c \
 			env_create.c \
 			parse.c \
-			signal.c
+			signal.c \
+			split_line.c
+
 SRC		=   $(addprefix srcs/, $(FILES))
 OBJ		=	$(SRC:.c=.o)
 INCLIB	=	-Llibft -lft

@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/07 18:08:20 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/08 22:00:24 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@
 
 typedef struct s_token
 {
-	int token;
+	int type;
 	char *str;
 }		t_token;
 
 typedef struct s_token_info
 {
 	int count;
-	t_token *token;
+	t_token *tokens;
 }	t_token_info;
 
 typedef struct s_env
@@ -54,9 +54,18 @@ void	get_env(char **envp, t_list **env);
 /********** parse **********/
 
 void	parse(t_list *env, char *line);
+int		double_quote(char *line, int i);
+int		single_quote(char *line, int i);
+int		check_end_quote(char *line, int i, t_token *token);
+void	counting_while(char *line, int *i, int *count);
+int		counting_token(char *line);
 
 /********** signal **********/
 
-void	set_signal(void);	
+void	set_signal(void);
+
+/******** split_line *********/
+
+t_token *split_token(char *line, int count, t_token *tokens);
 
 #endif
