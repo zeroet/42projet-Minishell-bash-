@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/09 00:21:47 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/09 22:58:31 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 # define T_REDIRECT 3
 # define T_DOUBLE_QUOTES 4
 # define T_SINGLE_QUOTES 5
+
+typedef	struct s_exit
+{
+	int	child;
+	int ret;
+}		t_exit;
+
+t_exit	g_global;
 
 typedef struct s_token
 {
