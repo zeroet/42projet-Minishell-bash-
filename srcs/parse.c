@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/08 22:26:34 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/09 00:30:43 by eyoo             ###   ########.fr       */
 /*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -132,7 +132,7 @@ int		lexical_analyser(t_list *env, char *line, t_token_info *token_info)
 	count = tokenizer(line, token_info);
 	if (count == -1)
 		return (-1);
-	env = NULL;
+	check_token_env(env, token_info);
 	return (count);
 }
 

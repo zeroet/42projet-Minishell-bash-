@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:11:32 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/02 19:45:07 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/08 23:16:27 by eyoo             ###   ########.fr       */
 /*   Updated: 2022/02/02 09:22:33 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -67,7 +67,7 @@ void	get_env(char **envp, t_list **env)
 	i = 0;
 	tmp = NULL;
 	ret = tmp;
-	while (envp[i] != '\0')
+	while (envp[i])
 	{	
 		new = new_env();
 		new->origin = ft_strdup(envp[i]);

@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/08 22:00:24 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/09 00:21:47 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,8 @@ void	set_signal(void);
 /******** split_line *********/
 
 t_token *split_token(char *line, int count, t_token *tokens);
+
+/********check token in env file **********/
+void	check_token_env(t_list *env, t_token_info *token_info);
 
 #endif

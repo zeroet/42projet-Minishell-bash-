@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/02/08 21:09:19 by seyun            ###   ########.fr        #
+#    Updated: 2022/02/09 00:19:47 by eyoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ HEADER		=	./includes/
 LIBFT_A		= 	./Libft/libft.a
 LIBFT_D		=	./Libft/
 RL			=   readline 
-RLL			=	/Users/$(USER)/homebrew/opt/readline/lib 
-RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
+RLL			=	/Users/$(USER)/.brew/opt/readline/lib 
+RLI			= 	/Users/$(USER)/.brew/opt/readline/include
 
 # =============================================================================
 # File Variables
@@ -50,7 +50,8 @@ FILES 	=	main.c \
 			env_create.c \
 			parse.c \
 			signal.c \
-			split_line.c
+			split_line.c\
+			check_token_env.c
 
 SRC		=   $(addprefix srcs/, $(FILES))
 OBJ		=	$(SRC:.c=.o)
