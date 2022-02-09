@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/08 22:00:24 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/09 22:41:18 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,16 @@
 # define T_DOUBLE_QUOTES 4
 # define T_SINGLE_QUOTES 5
 
+# define D_YES 0
+# define D_NO -1
+# define D_QUESTION 1
+# define D_ENV 2
+# define D_VOID 3
+
 typedef struct s_token
 {
 	int type;
+	int dollar;
 	char *str;
 }		t_token;
 
@@ -67,5 +74,16 @@ void	set_signal(void);
 /******** split_line *********/
 
 t_token *split_token(char *line, int count, t_token *tokens);
+
+
+/******** env_check *******/
+
+void	env_check(t_token_info *token_info);
+
+/******* set_token_type *****/
+
+void	set_token_type(t_token_info *token_info);
+
+
 
 #endif

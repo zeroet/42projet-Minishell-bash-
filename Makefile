@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/02/08 21:09:19 by seyun            ###   ########.fr        #
+#    Updated: 2022/02/09 21:29:51 by seyun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,9 @@ FILES 	=	main.c \
 			env_create.c \
 			parse.c \
 			signal.c \
-			split_line.c
+			split_line.c \
+			env_check.c \
+			set_token_type.c
 
 SRC		=   $(addprefix srcs/, $(FILES))
 OBJ		=	$(SRC:.c=.o)

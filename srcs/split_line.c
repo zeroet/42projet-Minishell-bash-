@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 21:05:47 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/08 22:26:35 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/09 20:14:37 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	split_token_while(char *line, t_token *tokens, int *i, int *idx)
 	{
 		start = *i;
 		*i = check_end_quote(line, *i, &tokens[*idx]);
-		tokens[(*idx)++].str = ft_substr(line, start + 1 , *i - start - 1);
+		tokens[*idx].str = ft_substr(line, start + 1 , *i - start - 1);
+		tokens[(*idx)++].dollar = -1;
 		(*i)++;
 	}
 	else
@@ -34,7 +35,8 @@ void	split_token_while(char *line, t_token *tokens, int *i, int *idx)
 				break ;
 			(*i)++;
 		}
-		tokens[(*idx)++].str = ft_substr(line, start, *i - start);
+		tokens[(*idx)].str = ft_substr(line, start, *i - start);
+		tokens[(*idx)++].dollar = -1;
 	}
 }
 
