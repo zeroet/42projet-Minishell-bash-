@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/08 22:26:34 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/09 22:45:10 by seyun            ###   ########.fr       */
 /*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -119,8 +119,6 @@ int		tokenizer(char *line, t_token_info *token_info)
 	if (token_info->tokens == NULL)
 		return (-1);
 	token_info->tokens = split_token(line, token_info->count, token_info->tokens);
-	for(int i =0; i < token_info->count; i++)
-		printf("%d ---token type || %s ---token str\n", token_info->tokens[i].type, token_info->tokens[i].str);
 	return (token_info->count);
 }
 
@@ -132,6 +130,10 @@ int		lexical_analyser(t_list *env, char *line, t_token_info *token_info)
 	count = tokenizer(line, token_info);
 	if (count == -1)
 		return (-1);
+	env_check(token_info);
+	set_token_type(token_info);
+	for(int i = 0; i < token_info->count; i++)
+		printf("%d ---token type || %s ---token str  || %d ----token dollar\n", token_info->tokens[i].type, token_info->tokens[i].str, token_info->tokens[i].dollar);
 	env = NULL;
 	return (count);
 }
@@ -141,16 +143,9 @@ int		lexical_analyser(t_list *env, char *line, t_token_info *token_info)
 void	parse(t_list *env, char *line)
 {
 	t_token_info tokens;
-	t_env		*env_list;
 	int			count;
 
 	count = 0;
-	while (env)
-	{
-		env_list = env->content;
-		printf("%s\n", env_list->origin);
-		env = env->next;
-	}
 	count = lexical_analyser(env, line, &tokens);
 	if (count == -1)
 		printf("*************count -1***************\n");	
