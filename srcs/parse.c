@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/09 00:30:43 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/10 00:36:15 by eyoo             ###   ########.fr       */
 /*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -131,7 +131,11 @@ int		lexical_analyser(t_list *env, char *line, t_token_info *token_info)
 	count = 0;
 	count = tokenizer(line, token_info);
 	if (count == -1)
+	{
+		g_global.ret = 258;
+		ft_putendl_fd("fail to lexical analysis", STDERR_FILENO);
 		return (-1);
+	}
 	check_token_env(env, token_info);
 	return (count);
 }
@@ -148,7 +152,7 @@ void	parse(t_list *env, char *line)
 	while (env)
 	{
 		env_list = env->content;
-		printf("%s\n", env_list->origin);
+		//printf("%s\n", env_list->origin);
 		env = env->next;
 	}
 	count = lexical_analyser(env, line, &tokens);
