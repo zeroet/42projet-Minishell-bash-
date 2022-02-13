@@ -6,14 +6,14 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:11:32 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/02 19:45:07 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/13 14:56:49 by seyun            ###   ########.fr       */
 /*   Updated: 2022/02/02 09:22:33 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	find(char *str, char c)
+int	find_same_char(char *str, char c)
 {
 	int i;
 
@@ -32,7 +32,7 @@ void	set_name_value(t_env *new)
 	int i;
 
 	i = 0;
-	i = find(new->origin, '=');
+	i = find_same_char(new->origin, '=');
 	if (i == 0)
 		ft_strexit("ERROR: PATH start '='\n");
 	new->name = ft_substr(new->origin, 0, i);

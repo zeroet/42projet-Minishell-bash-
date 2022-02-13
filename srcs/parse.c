@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/09 22:45:10 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/13 16:25:13 by seyun            ###   ########.fr       */
 /*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -130,15 +130,13 @@ int		lexical_analyser(t_list *env, char *line, t_token_info *token_info)
 	count = tokenizer(line, token_info);
 	if (count == -1)
 		return (-1);
-	env_check(token_info);
+	convert_env(token_info, env);
 	set_token_type(token_info);
 	for(int i = 0; i < token_info->count; i++)
-		printf("%d ---token type || %s ---token str  || %d ----token dollar\n", token_info->tokens[i].type, token_info->tokens[i].str, token_info->tokens[i].dollar);
+		printf("%d ---token type || %s ---token str\n", token_info->tokens[i].type, token_info->tokens[i].str);
 	env = NULL;
 	return (count);
 }
-
-// 낱말 분석 - 'space'단위로 split  단 " ' $ < > << | 만날때 예외처리
 
 void	parse(t_list *env, char *line)
 {
