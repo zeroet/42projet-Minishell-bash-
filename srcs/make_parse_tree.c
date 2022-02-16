@@ -6,12 +6,8 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 17:37:08 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/16 17:37:36 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/16 20:37:22 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 
-int	make_parse_tree(t_token_info tokens, t_ast root)
-{
-}
