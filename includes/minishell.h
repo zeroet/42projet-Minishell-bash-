@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/13 15:50:39 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/16 19:18:36 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define T_SINGLE_QUOTES 5
 
 
+int	g_return 0;
+
 typedef struct s_token
 {
 	int type;
@@ -49,10 +51,25 @@ typedef struct s_env
 	char *value;
 }		t_env;
 
-/********** env_create **********/
-void	get_env(char **envp, t_list **env);
+#define AST_NULL 0
+#define AST_PIPE 1
+#define AST_CMD 2
+#define AST_SIMPLE_CMD 3
+#define AST_REDIRCT 4
+#define AST_IO_REDIRCT 5
 
-/********** parse **********/
+typedef struct s_ast_tree
+{
+	char *node;
+	t_token *token_value;
+	struct t_ast_tree *left;
+	struct t_ast_tree *right;
+} t_ast;
+
+
+/* --------------- parse ----------------------*/
+
+void	get_env(char **envp, t_list **env);
 
 void	parse(t_list *env, char *line);
 int		double_quote(char *line, int i);
@@ -61,16 +78,11 @@ int		check_end_quote(char *line, int i, t_token *token);
 void	counting_while(char *line, int *i, int *count);
 int		counting_token(char *line);
 
-/********** signal **********/
-
 void	set_signal(void);
 
-/******** split_line *********/
+int		tokenizer(char *line, t_token_info *token_info);
 
 t_token *split_token(char *line, int count, t_token *tokens);
-
-
-/******** env_check *******/
 
 void	convert_env(t_token_info *token_info, t_list *env);
 char		*expand(char *line, int idx, t_list *env);
@@ -79,12 +91,14 @@ int		find_dollar(char *str);
 int		find_end_dollar(char *str, int idx);
 char	*is_env(t_list *env, char *name);
 
-
-
-/******* set_token_type *****/
-
 void	set_token_type(t_token_info *token_info);
 
+int		syntax_analyser(t_token_info tokens, t_ast *root);
+int		pipeline_check(t_token_info tokens, int idx);
+int		cmd_check(t_token_info tokens, int idx);
+int		io_redirect_check(t_token_info tokens, int idx);
+int		redirect_check(t_token_info tokens, int idx);
+int		simple_cmd_check(t_token_info tokens, int idx);
 
 
 #endif
