@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/15 23:07:26 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/16 19:18:36 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define T_DOUBLE_QUOTES 4
 # define T_SINGLE_QUOTES 5
 
+
+int	g_return 0;
 
 typedef struct s_token
 {
@@ -91,8 +93,12 @@ char	*is_env(t_list *env, char *name);
 
 void	set_token_type(t_token_info *token_info);
 
-int		syntax_analyser(t_token_info *tokens, t_ast *root)
-
+int		syntax_analyser(t_token_info tokens, t_ast *root);
+int		pipeline_check(t_token_info tokens, int idx);
+int		cmd_check(t_token_info tokens, int idx);
+int		io_redirect_check(t_token_info tokens, int idx);
+int		redirect_check(t_token_info tokens, int idx);
+int		simple_cmd_check(t_token_info tokens, int idx);
 
 
 #endif
