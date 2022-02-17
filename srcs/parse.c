@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/16 23:11:45 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/17 21:52:59 by seyun            ###   ########.fr       */
 /*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -35,9 +35,10 @@ int		syntax_analyser(const t_token_info tokens, t_ast **root)
 	idx = pipeline_check(tokens, 0);
 	if (idx == -1)
 	{
-		exit(EXIT_FAILURE);
+		printf("pipleline check fail \n");
 	}// case -1 free all & return error command not found
-	idx = set_syntax_pipleine(tokens, 0, root);
+	idx = set_syntax_pipeline(tokens, 0, root);
+	printf("set_syntax_pipeline last idx %d\n", idx);
 	return (idx);
 }
 
@@ -48,7 +49,7 @@ void	parse(t_list *env, char *line)
 	int				count;
 	int				idx;
 
-	root = NULL;
+	//root = NULL;
 	count = 0;
 	idx = 0;
 	count = lexical_analyser(env, line, &tokens); // malloc fail or quote error 

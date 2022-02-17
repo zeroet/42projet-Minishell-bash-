@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 20:37:36 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/16 23:08:49 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/17 20:39:34 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ int	set_syntax_cmd(t_token_info tokens, int idx, t_ast **node)
 
 int set_syntax_redirects(t_token_info tokens, int idx, t_ast **node)
 {
-	t_redirect redirect;
-
-	*node = new_ast(NULL, AST_REDIRECTS);
+	*node = new_ast(NULL, AST_REDIRECT);
 	idx = set_syntax_io_redirect(tokens, idx, &(*node)->left);
 	if (idx == -1)
 		return (-1);

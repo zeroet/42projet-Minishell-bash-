@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/02/16 17:21:03 by seyun            ###   ########.fr        #
+#    Updated: 2022/02/17 21:25:21 by seyun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,9 @@ FILES 	=	main.c \
 			expand.c \
 			set_token_type.c \
 			tokenize.c \
-			syntax_analyser.c
+			syntax_analyser.c \
+			set_syntax_tree.c \
+			set_syntax_tree2.c
 
 SRC		=   $(addprefix srcs/, $(FILES))
 OBJ		=	$(SRC:.c=.o)

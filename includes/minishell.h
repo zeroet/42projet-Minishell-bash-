@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/16 19:18:36 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/17 23:36:12 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 # define T_SINGLE_QUOTES 5
 
 
-int	g_return 0;
-
 typedef struct s_token
 {
 	int type;
@@ -51,21 +49,37 @@ typedef struct s_env
 	char *value;
 }		t_env;
 
-#define AST_NULL 0
 #define AST_PIPE 1
 #define AST_CMD 2
 #define AST_SIMPLE_CMD 3
-#define AST_REDIRCT 4
+#define AST_REDIRECT 4
 #define AST_IO_REDIRCT 5
 
 typedef struct s_ast_tree
 {
-	char *node;
-	t_token *token_value;
-	struct t_ast_tree *left;
-	struct t_ast_tree *right;
+	int		type;
+	void	*data;
+	struct s_ast_tree *left;
+	struct s_ast_tree *right;
 } t_ast;
 
+typedef struct s_simple_cmd
+{
+	char *original;
+	char *file_path;
+	char **argv;
+}	t_simple_cmd;
+
+# define INPUT 1
+# define OUTPUT 2
+# define HERE_DOCUMENTS 3
+# define APPENDING_OUTPUT 4
+
+typedef struct s_redirect
+{
+	int type;
+	char *filename;
+}	t_redirect;
 
 /* --------------- parse ----------------------*/
 
@@ -93,12 +107,23 @@ char	*is_env(t_list *env, char *name);
 
 void	set_token_type(t_token_info *token_info);
 
-int		syntax_analyser(t_token_info tokens, t_ast *root);
+int		syntax_analyser(const t_token_info tokens, t_ast **root);
 int		pipeline_check(t_token_info tokens, int idx);
 int		cmd_check(t_token_info tokens, int idx);
 int		io_redirect_check(t_token_info tokens, int idx);
 int		redirect_check(t_token_info tokens, int idx);
 int		simple_cmd_check(t_token_info tokens, int idx);
 
+
+
+int	redirect_type(char *str);
+t_ast *new_ast(void *item, int type);
+int	add_simple_cmd_argv(t_token_info tokens, t_simple_cmd *simple_cmd, int idx);
+int	set_syntax_io_redirect(t_token_info tokens, int idx, t_ast **node);
+int set_syntax_redirects(t_token_info tokens, int idx, t_ast **node);
+int	set_syntax_cmd(t_token_info tokens, int idx, t_ast **node);
+int set_syntax_pipeline(t_token_info tokens, int idx, t_ast **node);
+int	set_syntax_simple_cmd(t_token_info tokens, int idx, t_ast **node);
+int	set_syntax_argv(t_token_info tokens, int idx, char **args, int depth);
 
 #endif
