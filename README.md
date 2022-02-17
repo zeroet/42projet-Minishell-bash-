@@ -35,3 +35,8 @@ x   - 예정
 #### 13/02
 
 1. token.type까지 입력완료
+
+#### 17/02
+
+(ok) syntax_tree1,2
+(ing)make parse tree
