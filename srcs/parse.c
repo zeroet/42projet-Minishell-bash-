@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/10 00:36:15 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/17 22:35:17 by eyoo             ###   ########.fr       */
 /*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -119,9 +119,8 @@ int		tokenizer(char *line, t_token_info *token_info)
 	if (token_info->tokens == NULL)
 		return (-1);
 	token_info->tokens = split_token(line, token_info->count, token_info->tokens);
-	for(int i =0; i < token_info->count; i++)
-		printf("%d ---token type || %s ---token str\n", token_info->tokens[i].type, token_info->tokens[i].str);
-	return (token_info->count);
+		
+return (token_info->count);
 }
 
 int		lexical_analyser(t_list *env, char *line, t_token_info *token_info)
@@ -132,33 +131,50 @@ int		lexical_analyser(t_list *env, char *line, t_token_info *token_info)
 	count = tokenizer(line, token_info);
 	if (count == -1)
 	{
-		g_global.ret = 258;
+		g_return = 258;
 		ft_putendl_fd("fail to lexical analysis", STDERR_FILENO);
 		return (-1);
 	}
 	check_token_env(env, token_info);
+	set_token_type(token_info);
+	for(int i =0; i < token_info->count; i++)
+	{
+		printf("%d ---token type || %s ---token str\n", token_info->tokens[i].type, token_info->tokens[i].str);
+	}
+	env = NULL;
 	return (count);
 }
 
-// 낱말 분석 - 'space'단위로 split  단 " ' $ < > << | 만날때 예외처리
+int		syntax_analyser(const t_token_info tokens, t_tree **root)
+{
+	int	idx;
+
+	idx = pipeline_check(tokens, 0);
+	if (idx == -1)
+	{
+		exit(EXIT_FAILURE);
+	}
+	idx = set_syntax_pipeline(tokens, 0, root);
+	return (idx);
+}
 
 void	parse(t_list *env, char *line)
 {
 	t_token_info tokens;
-	t_env		*env_list;
+	t_tree		*root;
 	int			count;
+	int			idx;
 
 	count = 0;
-	while (env)
-	{
-		env_list = env->content;
-		//printf("%s\n", env_list->origin);
-		env = env->next;
-	}
 	count = lexical_analyser(env, line, &tokens);
+	idx = syntax_analyser(tokens, &root);
 	if (count == -1)
 		printf("*************count -1***************\n");	
 	else
 		printf("************token %d ***************\n", count);
+	if (idx == -1)
+		printf("index -1\n");
+	else 
+		printf("size of node = %d\n", idx);
 	return ;
 }
