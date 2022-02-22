@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/18 00:19:34 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/23 00:18:55 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 # define T_DOUBLE_QUOTES 4
 # define T_SINGLE_QUOTES 5
 
-int		g_return;
-
 typedef struct s_token
 {
 	int type;
@@ -50,7 +48,6 @@ typedef struct s_env
 	char *value;
 }		t_env;
 
-#define	TREE_NULL 0
 #define	TREE_PIPE 1
 #define	TREE_CMD 2
 #define	TREE_SIMPLE_CMD 3
@@ -59,10 +56,10 @@ typedef struct s_env
 
 typedef	struct	s_tree
 {
-	char *node;
-	t_token *token_value;
-	struct t_tree *left;
-	struct t_tree *right;
+	int	type;
+	void *data;
+	struct s_tree *left;
+	struct s_tree *right;
 }		t_tree;
 
 typedef struct s_simple_cmd
@@ -123,5 +120,6 @@ int		set_syntax_simple_cmd(t_token_info tokens, int idx, t_tree **node);
 int		add_simple_cmd_argv(t_token_info tokens, t_simple_cmd *simple_cmd, int idx);
 t_tree	*new_tree(void *item, int type);
 int		redirect_type(char *str);
+int	set_syntax_argv(t_token_info tokens, int idx, char **args, int depth);
 
 #endif

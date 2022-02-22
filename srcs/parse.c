@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/17 22:35:17 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/23 00:03:19 by eyoo             ###   ########.fr       */
 /*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -141,7 +141,6 @@ int		lexical_analyser(t_list *env, char *line, t_token_info *token_info)
 	{
 		printf("%d ---token type || %s ---token str\n", token_info->tokens[i].type, token_info->tokens[i].str);
 	}
-	env = NULL;
 	return (count);
 }
 
@@ -155,6 +154,7 @@ int		syntax_analyser(const t_token_info tokens, t_tree **root)
 		exit(EXIT_FAILURE);
 	}
 	idx = set_syntax_pipeline(tokens, 0, root);
+	printf("set_syntax_pipeline last idx %d\n", idx);
 	return (idx);
 }
 
