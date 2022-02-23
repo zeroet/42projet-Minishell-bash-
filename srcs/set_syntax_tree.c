@@ -6,7 +6,7 @@
 /*   By: eyoo <eyoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 22:31:43 by eyoo              #+#    #+#             */
-/*   Updated: 2022/02/23 00:15:30 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/23 15:44:58 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	add_simple_cmd_argv(t_token_info tokens, t_simple_cmd *simple_cmd, int idx)
 	if (tokens.tokens[idx + 1].type == T_WORD)
 	{
 		i = 0;
-		while (tokens.tokens[idx + 1].type == T_WORD)
+		while (tokens.tokens[idx + i].type == T_WORD)
 			i++;
 		simple_cmd->argv = (char **)malloc(sizeof(char *) * (i + 1));
 		if (simple_cmd->argv == NULL)

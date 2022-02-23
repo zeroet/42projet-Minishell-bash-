@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/02/17 23:58:53 by eyoo             ###   ########.fr        #
+#    Updated: 2022/02/23 13:20:22 by eyoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ HEADER		=	./includes/
 LIBFT_A		= 	./Libft/libft.a
 LIBFT_D		=	./Libft/
 RL			=   readline 
-RLL			=	/Users/$(USER)/.brew/opt/readline/lib 
-RLI			= 	/Users/$(USER)/.brew/opt/readline/include
+RLL			=	/Users/$(USER)/homebrew/opt/readline/lib 
+RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
 
 # =============================================================================
 # File Variables

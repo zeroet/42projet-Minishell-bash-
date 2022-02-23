@@ -6,7 +6,7 @@
 /*   By: eyoo <eyoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 23:42:23 by eyoo              #+#    #+#             */
-/*   Updated: 2022/02/16 21:28:32 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/23 15:55:22 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,13 @@ int	check_start_dollar(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
 		if(str[i] == '$')
 		{
-			if (ft_isalpha(str[i + 1]) || str[i + 1] == '_' || str[i + 1] == '?')
-			{
-				return (i);
-			}
-			if (str[i + 1] == '$' || str[i + 1] =='\0')
+			if (str[i + 1] == ' ' || str[i + 1] =='\0')
 				return (-1);
+			return (i);
 		}
 		i++;
 	}
@@ -35,14 +32,15 @@ int	check_start_dollar(char *str)
 
 int	check_end_dollar(char *str, int	idx)
 {
-	if (str[idx] == '?')
-		return (idx);
 	while (str[idx])
 	{
-		if (ft_isalpha(str[idx]) || str[idx] == '_' || ft_isdigit(str[idx]))
+		if (str[idx] == '?')
+			return (idx);
+		if (str[idx] == ' ' || str[idx] == '\0')
+			return (idx - 1);
 		idx++;
 	}
-	return (idx - 1);
+	return (idx);
 }
 
 
@@ -90,12 +88,12 @@ char	*make_new_str(t_list *env, char *token, int start_dollar, int end_dollar)
 	char	*str_new;
 	int		str_new_len;
 
-	env_name = ft_substr(token, start_dollar + 1, end_dollar - start_dollar);//달러다음 토큰을 잘라넣기
+	env_name = ft_substr(token, start_dollar + 1, end_dollar - start_dollar);
 	if (*env_name == '?')
-		env_value = ft_itoa(-1);// 물음표 있을때 안들어가네...
+		env_value = ft_itoa(-1);
 	else
 		env_value = find_name_in_env(env, env_name);
-	str_new_len = ft_strlen(token) - (end_dollar - start_dollar + 1) + ft_strlen(env_value);
+	str_new_len = ft_strlen(token) - (end_dollar - start_dollar) + ft_strlen(env_value);
 	str_new = (char *)malloc(sizeof(char) *(str_new_len + 1));
 	if (str_new == NULL)
 		return (NULL);
@@ -113,6 +111,7 @@ void	check_token_env(t_list *env, t_token_info *token_info)
 	char *str_new;
 
 	i = 0;
+	str_new = NULL;
 	while (i < token_info->count)
 	{
 		if (token_info->tokens[i].type != T_SINGLE_QUOTES)
@@ -126,8 +125,9 @@ void	check_token_env(t_list *env, t_token_info *token_info)
 				token_info->tokens[i].str = str_new;
 				continue;
 			}
+			i++;
 		}
-		i++;
 	}
+	return ;
 }
 
