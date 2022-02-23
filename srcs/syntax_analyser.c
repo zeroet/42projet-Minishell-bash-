@@ -6,7 +6,7 @@
 /*   By: eyoo <eyoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 22:11:05 by eyoo              #+#    #+#             */
-/*   Updated: 2022/02/17 22:26:56 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/23 16:26:58 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	simple_cmd_check(t_token_info tokens, int idx)
 		if (tokens.tokens[idx].type == T_WORD)
 		{
 			i = 0;
-			while (tokens.tokens[idx + 1].type == T_WORD)
+			while (tokens.tokens[idx + i].type == T_WORD)
 				i++;
 			idx += i;
 		}
