@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/23 00:26:39 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/25 12:10:33 by eyoo             ###   ########.fr       */
 /*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -159,20 +159,26 @@ int		syntax_analyser(const t_token_info tokens, t_tree **root)
 void	parse(t_list *env, char *line)
 {
 	t_token_info tokens;
+	t_simple_cmd simple_cmd;
 	t_tree		*root;
 	int			count;
 	int			idx;
 
 	count = 0;
 	count = lexical_analyser(env, line, &tokens);
-	idx = syntax_analyser(tokens, &root);
 	if (count == -1)
 		printf("*************count -1***************\n");	
+	root = NULL;
+	idx = syntax_analyser(tokens, &root);
+	if (idx == -1 || root == NULL)
+	{
+		printf("index -1\n");
+		free_tokens(&tokens);
+	}
 	else
 		printf("************token %d ***************\n", count);
-	if (idx == -1)
-		printf("index -1\n");
-	else 
 		printf("size of node = %d\n", idx);
+	set_path_in_tree(env, root, &simple_cmd);
+	free_tokens(&tokens);
 	return ;
 }

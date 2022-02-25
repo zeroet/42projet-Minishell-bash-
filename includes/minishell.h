@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/23 00:18:55 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/25 23:55:00 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <signal.h>
 #include "../libft/libft.h"
 #include <termios.h>
+#include <sys/stat.h>
 
 # define T_NULL 0
 # define T_WORD 1
@@ -102,6 +103,13 @@ t_token *split_token(char *line, int count, t_token *tokens);
 
 /********check token in env file **********/
 void	check_token_env(t_list *env, t_token_info *token_info);
+char	*make_new_str(t_list *env, char *token, int start_dollar, int end_dollar);
+void	set_new_str(char *str_new, char *substr1, char *env_value, char *substr2);
+void	*find_name_in_env(t_list *env, char *env_name);
+int		check_end_dollar(char *str, int	idx);
+int		check_start_dollar(char *str);
+
+
 void	set_token_type(t_token_info *token_info);
 
 
@@ -120,6 +128,15 @@ int		set_syntax_simple_cmd(t_token_info tokens, int idx, t_tree **node);
 int		add_simple_cmd_argv(t_token_info tokens, t_simple_cmd *simple_cmd, int idx);
 t_tree	*new_tree(void *item, int type);
 int		redirect_type(char *str);
-int	set_syntax_argv(t_token_info tokens, int idx, char **args, int depth);
+int		set_syntax_argv(t_token_info tokens, int idx, char **args, int depth);
 
+void	set_path_in_tree(t_list *env, t_tree *node, t_simple_cmd *simple_cmd);
+void	set_simple_cmd_path(t_list *env, t_simple_cmd *simple_cmd);
+char	*get_path(t_list *env, char *cmd);
+
+void	free_tree(t_tree **node);
+void	free_tree_node(t_tree **node);
+void	free_redirect(t_redirect *redirect);
+void	free_simple_cmd(t_simple_cmd *simple_cmd);
+void	free_tokens(t_token_info *tokens);
 #endif

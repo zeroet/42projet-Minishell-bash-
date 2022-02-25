@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/02/23 13:20:22 by eyoo             ###   ########.fr        #
+#    Updated: 2022/02/24 19:03:26 by eyoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ HEADER		=	./includes/
 LIBFT_A		= 	./Libft/libft.a
 LIBFT_D		=	./Libft/
 RL			=   readline 
-RLL			=	/Users/$(USER)/homebrew/opt/readline/lib 
-RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
+RLL			=	/Users/$(USER)/.brew/opt/readline/lib 
+RLI			= 	/Users/$(USER)/.brew/opt/readline/include
 
 # =============================================================================
 # File Variables
@@ -55,7 +55,9 @@ FILES 	=	main.c \
 			set_token_type.c\
 			syntax_analyser.c\
 			set_syntax_tree.c\
-			set_syntax_tree2.c
+			set_syntax_tree2.c\
+			set_path_in_tree.c\
+			free.c
 
 SRC		=   $(addprefix srcs/, $(FILES))
 OBJ		=	$(SRC:.c=.o)

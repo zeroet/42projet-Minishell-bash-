@@ -6,7 +6,7 @@
 /*   By: eyoo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:04:46 by eyoo              #+#    #+#             */
-/*   Updated: 2022/02/23 16:22:10 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/02/25 23:56:29 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	free_tree(t_tree **node)
 	if ((*node)->left != NULL)
 		free_tree(&(*node)->left);
 	if ((*node)->right != NULL)
-		free_tree((*node)->right);
+		free_tree(&(*node)->right);
 	free_tree_node(node);
 	free(*node);
 }
