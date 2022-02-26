@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 18:22:10 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/23 18:43:52 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/26 13:36:31 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_full_path(t_list *env, char *cmd)
 
 	if (ft_strncmp(cmd, "/", 1) == 0)
 		full_path = ft_strdup(cmd);
-	else if (ft_strncmp("./", cmd, 2) == 0)
+	else if (ft_strncmp("./", cmd, 2) == 0) // 현재 dir
 	{
 		cmd = ft_substr(cmd, 2, ft_strlen(cmd) - 2);
 		curr_path = get_curr_path();
@@ -33,7 +33,7 @@ char	*get_full_path(t_list *env, char *cmd)
 
 void	set_path_simple_cmd(t_list *env, t_simple_cmd *simple_cmd)
 {
-	simple_cmd->file_paht = get_full_path(env, simple_cmd->original);
+	simple_cmd->file_path = get_full_path(env, simple_cmd->original);
 }
 
 void	set_path_in_tree(t_list *env, t_ast *node)
