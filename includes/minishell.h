@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/17 23:36:12 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/26 13:45:28 by seyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <readline/history.h>
 #include <readline/readline.h>
+#include <sys/stat.h>
 #include <stdlib.h>
 #include <signal.h>
 #include "../libft/libft.h"
@@ -125,5 +126,19 @@ int	set_syntax_cmd(t_token_info tokens, int idx, t_ast **node);
 int set_syntax_pipeline(t_token_info tokens, int idx, t_ast **node);
 int	set_syntax_simple_cmd(t_token_info tokens, int idx, t_ast **node);
 int	set_syntax_argv(t_token_info tokens, int idx, char **args, int depth);
+
+//pwd 
+char *get_curr_path(void);
+
+
+//full_path
+void	set_path_simple_cmd(t_list *env, t_simple_cmd *simple_cmd);
+char	*get_full_path(t_list *env, char *cmd);
+void	set_path_in_tree(t_list *env, t_ast *node);
+char *get_full_path_by_env(t_list *env, char *filename);
+t_env	*find_env_key(t_list *env, char *env_name);
+char	*get_env_value(t_list *env, char *env_name);
+void	free_double_char(char **lines);
+char	**get_env_path(t_list *env);
 
 #endif
