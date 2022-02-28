@@ -6,7 +6,7 @@
 /*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:18:21 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/26 14:01:54 by seyun            ###   ########.fr       */
+/*   Updated: 2022/02/28 21:35:52 by eyoo             ###   ########.fr       */
 /*   Updated: 2022/02/07 20:11:13 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -51,6 +51,8 @@ void	parse(t_list *env, char *line)
 	count = 0;
 	idx = 0;
 	count = lexical_analyser(env, line, &tokens); // malloc fail or quote error 
+	if (count == -1)
+		return ;
 	idx = syntax_analyser(tokens, &root);
 	set_path_in_tree(env, root);
 //	free_token(&tokens);
