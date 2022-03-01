@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/26 13:45:28 by seyun            ###   ########.fr       */
+/*   Updated: 2022/03/01 15:07:19 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ typedef struct s_control
 
 /* --------------- parse ----------------------*/
 
-char	*set_pipe_str(char *line);
-int		check_pipe(char *line);
+char	*set_pipe_redirec(char *line);
+char	*check_pipe_redirec(char *line, char *new_line, int size_str);
+int		check_num_pipe_redirec(char *line);
 void	get_env(char **envp, t_list **env);
 
 t_ast	*parse(t_list *env, char *line);

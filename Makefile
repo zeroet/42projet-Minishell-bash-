@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/02/28 22:55:17 by eyoo             ###   ########.fr        #
+#    Updated: 2022/03/01 15:09:47 by eyoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,10 @@ HEADER		=	./includes/
 LIBFT_A		= 	./Libft/libft.a
 LIBFT_D		=	./Libft/
 RL			=   readline 
-RLL			=	/Users/$(USER)/.brew/opt/readline/lib 
-RLI			= 	/Users/$(USER)/.brew/opt/readline/include
-#RLL			=	/Users/$(USER)/homebrew/opt/readline/lib 
-#RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
+#RLL			=	/Users/$(USER)/.brew/opt/readline/lib 
+#RLI			= 	/Users/$(USER)/.brew/opt/readline/include
+RLL			=	/Users/$(USER)/homebrew/opt/readline/lib 
+RLI			= 	/Users/$(USER)/homebrew/opt/readline/include
 
 
 # =============================================================================
@@ -62,7 +62,8 @@ FILES 	=	main.c \
 			set_syntax_tree2.c \
 			get_full_path.c \
 			get_env_path.c \
-			pwd.c
+			pwd.c\
+			set_pipe_redirec.c
 
 SRC		=   $(addprefix srcs/, $(FILES))
 OBJ		=	$(SRC:.c=.o)

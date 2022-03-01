@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:58:28 by seyun             #+#    #+#             */
-/*   Updated: 2022/02/28 22:57:31 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/03/01 15:07:10 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int main(int ac, char **av, char **envp)
 	char *line;
 	t_list *env;
 	t_ast	*root;
-	t_control	*control;
+	t_control	control;
 
 	if (ac || av)
 		;
@@ -36,7 +36,8 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = readline("minishell > ");
-		line = set_pipe_str(line);
+		add_history(line);
+		line = set_pipe_redirec(line);
 		if (!line) //바쉬와 동일하게 출력. 개행방지
 		{	
 			printf("\033[1A");//ANSI control sequences 커서한칸위로
@@ -50,10 +51,10 @@ int main(int ac, char **av, char **envp)
 			if (!root)
 			{
 				init_control(&control);
-				search_tree(root, *env, &control);
-				free_tree(&root);
+			//	search_tree(root, *env, &control);
+			//	free_tree(&root);
 			}
-		add_history(line);
+		}
 		free(line);
 		line = NULL;
 	}
