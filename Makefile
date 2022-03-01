@@ -6,7 +6,7 @@
 #    By: seyun <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 16:49:41 by seyun             #+#    #+#              #
-#    Updated: 2022/03/01 15:09:47 by eyoo             ###   ########.fr        #
+#    Updated: 2022/03/01 16:05:09 by eyoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ FILES 	=	main.c \
 			get_full_path.c \
 			get_env_path.c \
 			pwd.c\
-			set_pipe_redirec.c
+			set_pipe_redirec.c\
+			execute_tree.c
 
 SRC		=   $(addprefix srcs/, $(FILES))
 OBJ		=	$(SRC:.c=.o)

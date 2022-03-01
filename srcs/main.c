@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:58:28 by seyun             #+#    #+#             */
-/*   Updated: 2022/03/01 15:07:10 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/03/01 16:07:01 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int main(int ac, char **av, char **envp)
 			if (!root)
 			{
 				init_control(&control);
-			//	search_tree(root, *env, &control);
+				search_tree(root, env, &control);
 			//	free_tree(&root);
 			}
 		}

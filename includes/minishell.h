@@ -6,7 +6,7 @@
 /*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:29 by seyun             #+#    #+#             */
-/*   Updated: 2022/03/01 15:07:19 by eyoo             ###   ########.fr       */
+/*   Updated: 2022/03/01 16:09:44 by eyoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ typedef struct s_control
 	int fd_output;
 }	t_control;
 
+# define READ_END 0
+# define WRITE_END 1
+
 /* --------------- parse ----------------------*/
 
 char	*set_pipe_redirec(char *line);
@@ -155,5 +158,12 @@ t_env	*find_env_key(t_list *env, char *env_name);
 char	*get_env_value(t_list *env, char *env_name);
 void	free_double_char(char **lines);
 char	**get_env_path(t_list *env);
+
+//execute_tree 
+void    search_tree(t_ast *node, t_list *env, t_control *control);
+void    execute_tree(t_ast *node, t_list *env, t_control *control);
+void    next_pipe_check(t_ast *node, t_control *control);
+void	init_dup2(t_control *control);
+
 
 #endif
